@@ -1,0 +1,58 @@
+<div class="row" style="margin-top: 50px;">
+    <div class="col"></div>
+    <div class="col">
+        <div class="text-center">
+            <h2>4E Org Adoption Tree</h2>
+        </div>
+        <hr>
+        <div class="text-center">
+            <h4>Signup</h4>
+        </div>
+        <form [formGroup]="myForm" (ngSubmit)="submit()">
+            <div class="mb-3">
+                <label for="exampleInputName1" class="form-label">Name</label> :
+                <span class="text-danger"
+                    *ngIf="myForm.controls['name'].invalid && myForm.controls['name'].touched">Name Required !!!</span>
+                <input type="text" formControlName="name" placeholder="Enter your name here" class="form-control"
+                    id="name" aria-describedby="nameHelp">
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputAge1" class="form-label">Age</label> :
+                <span class="text-danger" *ngIf="myForm.controls['age'].invalid && myForm.controls['age'].touched">Age
+                    Required !!!</span>
+                <input type="number" formControlName="age" placeholder="Enter your age here" class="form-control"
+                    id="age">
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email</label> :
+                <span class="text-danger" *ngIf="checkRequiredEmail() && myForm.controls['email'].touched">Email
+                    Required !!!</span>
+                <span class="text-danger" *ngIf="checkPatternEmail()">Email is invalid</span>
+                <input type="email" formControlName="email" placeholder="Enter your email here" class="form-control"
+                    id="email" aria-describedby="emailHelp">
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label> :
+                <span class="text-danger"
+                    *ngIf="checkRequiredPassword() && myForm.controls['password'].touched">Password Required !!!</span>
+                <span class="text-danger" *ngIf="checkLengthPassword()">Password length required is 6 - 20
+                    characters</span>
+                <input type="password" formControlName="password" placeholder="Enter your password here"
+                    class="form-control" id="password">
+            </div>
+
+            <div class="text-center">
+                <button [disabled]="!checkValid()" type="submit" class="btn btn-primary">Signup</button>
+            </div>
+        </form>
+        <hr>
+        <div class="text-center">
+            Already have an account ? <br>
+            <a routerLink="/signin">Signin Here</a>
+        </div><br /><br />
+    </div>
+    <div class="col"></div>
+</div>

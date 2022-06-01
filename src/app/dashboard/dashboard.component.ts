@@ -10,11 +10,10 @@ import { TokenService } from '../token.service';
 export class DashboardComponent implements OnInit {
 
   constructor(private ts: TokenService, private router: Router) { }
-  
+
   ngOnInit(): void {
-    if (this.ts.getToken() === null)
-      this.router.navigate(['/signin']);
-    else this.router.navigate(['/dash']);
+    if (this.ts.getToken() !== null)
+      this.router.navigate(['/dash']);
   }
 
 }

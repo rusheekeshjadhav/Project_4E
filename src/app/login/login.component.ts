@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
 
     if (this.myForm.valid)
       this.ls.signin(this.myForm.value.email, this.myForm.value.password).subscribe(data => {
-        console.log(data);
+        // console.log(data);
         // console.log(typeof data);
         this.ts.saveToken(data);
         this.router.navigate(['/dash']);

@@ -12,14 +12,9 @@ export class DashboardComponent implements OnInit {
   constructor(private ts: TokenService, private router: Router) { }
   
   ngOnInit(): void {
-    if (localStorage.getItem("token") === null)
+    if (this.ts.getToken() === null)
       this.router.navigate(['/signin']);
     else this.router.navigate(['/dash']);
-  }
-
-  logout() {
-    this.ts.clearToken();
-    this.router.navigate(['/signin']);
   }
 
 }

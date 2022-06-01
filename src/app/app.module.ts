@@ -7,9 +7,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { SignupComponent } from './signup/signup.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgChartsModule } from 'ng2-charts';
 import { PieComponent } from './pie/pie.component';
+import { AuthInterceptor, authInterceptorProviders } from './auth.interceptor';
+import { NavbarComponent } from './navbar/navbar.component';
+import { CreateKPIComponent } from './create-kpi/create-kpi.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,9 @@ import { PieComponent } from './pie/pie.component';
     LoginComponent,
     DashboardComponent,
     SignupComponent,
-    PieComponent
+    PieComponent,
+    NavbarComponent,
+    CreateKPIComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +31,7 @@ import { PieComponent } from './pie/pie.component';
     HttpClientModule,
     NgChartsModule
   ],
-  providers: [],
+  providers: [authInterceptorProviders, HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

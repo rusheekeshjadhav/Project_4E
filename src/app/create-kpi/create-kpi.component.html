@@ -1,0 +1,49 @@
+<app-navbar></app-navbar>
+create kpi works !!!
+<div class="row">
+    <div class="col-4">hi</div>
+    <div class="col-8">
+        <form [formGroup]="kpiForm" (ngSubmit)="submit()">
+            <table>
+                <thead></thead>
+                <tbody>
+                    <tr>
+                        <td>KPI Title</td>
+                        <td>:</td>
+                        <td><input type="text" placeholder="KPI Title"></td>
+                    </tr>
+                    <tr>
+                        <td>Department ID</td>
+                        <td>:</td>
+                        <td><input type="text" placeholder="Department ID"></td>
+                    </tr>
+                    <tr>
+                        <td>Perspective</td>
+                        <td>:</td>
+                        <td><input type="text" placeholder="Perspective"></td>
+                    </tr>
+                    <tr>
+                        <td>Goal Description</td>
+                        <td>:</td>
+                        <td><textarea name="" id="" style="height: 50px; width: 225px;" cols="30" rows="10" placeholder="Goal Description"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Remark</td>
+                        <td>:</td>
+                        <td><input type="text" placeholder="Remark"></td>
+                    </tr>
+                    <tr>
+                        <td>Data Capture Frequency</td>
+                        <td>:</td>
+                        <td><input type="text" placeholder="Data Capture Frequency"></td>
+                    </tr>
+                    <tr>
+                        <td>Review Frequency</td>
+                        <td>:</td>
+                        <td><input type="text" placeholder="Review Frequency"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>

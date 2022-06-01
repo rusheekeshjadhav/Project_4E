@@ -5,6 +5,8 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
+import { AuthGuard } from './auth.guard';
+import { CreateKPIComponent } from './create-kpi/create-kpi.component';
 
 const routes: Routes = [
   {
@@ -22,7 +24,13 @@ const routes: Routes = [
   },
   {
     path: 'dash',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'createkpi',
+    component: CreateKPIComponent,
+    canActivate: [AuthGuard]
   }];
 
 @NgModule({

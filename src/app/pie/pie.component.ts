@@ -40,9 +40,9 @@ export class PieComponent {
       data => {
         this.pieChartData = data as any[];	 // FILL THE CHART ARRAY WITH DATA.
       },
-      (err: HttpErrorResponse) => {
-        console.log(err.message);
-      }
+      // (err: HttpErrorResponse) => {
+      //   console.log(err.message);
+      // }
     );
   }
 

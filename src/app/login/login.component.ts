@@ -14,9 +14,8 @@ export class LoginComponent implements OnInit {
   constructor(private ls: LoginService, private ts: TokenService, private router: Router) { }
   
   ngOnInit(): void {
-    if (localStorage.getItem("token") === null)
-      this.router.navigate(['/signin']);
-    else this.router.navigate(['/dash']);
+    if (this.ts.getToken() !== null)
+      this.router.navigate(['/dash']);
   }
 
   myForm = new FormGroup({
@@ -30,7 +29,7 @@ export class LoginComponent implements OnInit {
 
     if (this.myForm.valid)
       this.ls.signin(this.myForm.value.email, this.myForm.value.password).subscribe(data => {
-        // console.log(data);
+        console.log(data);
         // console.log(typeof data);
         this.ts.saveToken(data);
         this.router.navigate(['/dash']);

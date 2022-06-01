@@ -7,11 +7,15 @@ export class TokenService {
 
   constructor() { }
 
-  saveToken(token: any){
-    localStorage.setItem("token",token.token);
+  getToken(): string | null {
+    return localStorage.getItem("token");
   }
 
-  clearToken(){
+  saveToken(token: any) {
+    localStorage.setItem("token", token.response);
+  }
+
+  clearToken() {
     localStorage.clear();
   }
 }

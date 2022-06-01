@@ -1,9 +1,9 @@
 <app-navbar></app-navbar>
 
 <div class="row">
-    <div class="col-4">hi</div>
+    <div class="col-4">4E Org</div>
     <div class="col-8">
-        <form [formGroup]="kpiForm" (ngSubmit)="submit()">
+        <form [formGroup]="kpiForm" (ngSubmit)="submit()" style="outline: auto; margin: 20px; padding: 20px;">
             <table>
                 <thead></thead>
                 <tbody>
@@ -91,9 +91,10 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="text-center">
-                <button [disabled]="!kpiForm.valid" type="submit" class="btn btn-primary">Save KPI</button>
-            </div>
         </form>
+    </div>
+    <hr>
+    <div class="text-center" style="margin-bottom: 20px;">
+        <button [disabled]="!kpiForm.valid" type="submit" class="btn btn-primary">Save KPI</button>
     </div>
 </div>

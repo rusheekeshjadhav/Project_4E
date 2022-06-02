@@ -32,6 +32,19 @@
                     </tr>
 
                     <tr>
+                        <td>KPI Category</td>
+                        <td>:</td>
+                        <td>
+                            <select formControlName="category">
+                                <option *ngFor="let item of kpiCategory" [value]="item._id">{{item.category}}</option>
+                            </select><br>
+                            <span class="text-danger"
+                                *ngIf="kpiForm.controls['category'].invalid && kpiForm.controls['category'].touched">Please
+                                select KPI Category !!!</span>
+                        </td>
+                    </tr>
+
+                    <tr>
                         <td>Department ID</td>
                         <td>:</td>
                         <td>
@@ -48,12 +61,20 @@
                         <td>Perspective</td>
                         <td>:</td>
                         <td>
-                            <select formControlName="perspective">
+                            <select formControlName="perspective" (change)="setPerspectivePrefix()">
                                 <option *ngFor="let item of pers" [value]="item._id">{{item.perspective}}</option>
                             </select><br>
                             <span class="text-danger"
                                 *ngIf="kpiForm.controls['perspective'].invalid && kpiForm.controls['perspective'].touched">Please
                                 select Perspective !!!</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Perspective Prefix</td>
+                        <td>:</td>
+                        <td>
+                            <input readonly=true type="text" value="{{perspectivePrefix}}" formControlName="perspectivePrefix"><br>
                         </td>
                     </tr>
 

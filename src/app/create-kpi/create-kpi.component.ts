@@ -22,11 +22,11 @@ export class CreateKPIComponent implements OnInit {
     dataCaptureFrequency: new FormControl('', [Validators.required]),
     reviewFrequency: new FormControl('', [Validators.required]),
     type: new FormControl('', [Validators.required]),
+    category: new FormControl('', [Validators.required]),
+    perspectivePrefix: new FormControl('', [Validators.required]),
 
     financialYearStart: new FormControl(1648751400000),
     financialYearEnd: new FormControl(1680287399000),
-    category: new FormControl("5ea2c50f1d4ec94491c08030"),
-    perspectivePrefix: new FormControl("I"),
     directionOfGoodness: new FormControl("Up"),
     isTypeKPI: new FormControl(true),
     annualTarget: new FormControl(100),
@@ -74,6 +74,9 @@ export class CreateKPIComponent implements OnInit {
   dataCap: any = [];
   review: any = [];
   kpiType: any = [];
+  kpiCategory: any = [];
+
+  perspectivePrefix: string = '';
 
   ngOnInit(): void {
     this.ks.getDepartment().subscribe(data => {
@@ -85,7 +88,7 @@ export class CreateKPIComponent implements OnInit {
 
     this.ks.getPerspective().subscribe(data => {
       data.response.forEach((element: any) => {
-        // console.log(element);
+        console.log(element);
         this.pers.push(element);
       });
     });
@@ -110,6 +113,13 @@ export class CreateKPIComponent implements OnInit {
         this.kpiType.push(element);
       });
     });
+
+    this.ks.getCategory().subscribe(data => {
+      data.response.forEach((element: any) => {
+        // console.log(element);
+        this.kpiCategory.push(element);
+      });
+    });
   }
 
   submit() {
@@ -128,6 +138,12 @@ export class CreateKPIComponent implements OnInit {
     return this.dataCap.find((element: { _id: any; }) => {
       return element._id === this.kpiForm.value['dataCaptureFrequency'];
     }).order;
+  }
+
+  setPerspectivePrefix(){
+    this.perspectivePrefix = this.pers.find((element: { _id: any; }) => {
+      return element._id === this.kpiForm.value['perspective'];
+    }).perspectivePrefix;
   }
 
   filterOrder() {

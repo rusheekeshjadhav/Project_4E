@@ -11,11 +11,11 @@ export class AuthGuard implements CanActivate {
   constructor(private ts: TokenService, private router: Router) { }
 
   canActivate(): boolean {
-    if (this.ts.getToken()) {
+    const token = this.ts.getToken();
+    if (token && !this.ts.isTokenExpired(token)) {
       return true;
     }
     this.router.navigate(['/signin']);
     return false;
   }
-
 }

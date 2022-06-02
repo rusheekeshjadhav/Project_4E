@@ -4,3 +4,12 @@ td{
 div{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
+input{
+    height: 30px; width: 350px;
+}
+textarea{
+    height: 60px; width: 350px;
+}
+select{
+    height: 30px; width: 350px;
+}

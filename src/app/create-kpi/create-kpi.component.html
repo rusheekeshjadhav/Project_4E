@@ -11,7 +11,7 @@
                         <td>KPI Title</td>
                         <td>:</td>
                         <td>
-                            <input type="text" style="height: 30px; width: 350px;" formControlName="title"><br>
+                            <input type="text" formControlName="title"><br>
                             <span class="text-danger"
                                 *ngIf="kpiForm.controls['title'].invalid && kpiForm.controls['title'].touched">Please
                                 add KPI Title !!!</span>
@@ -19,10 +19,23 @@
                     </tr>
 
                     <tr>
+                        <td>KPI Type</td>
+                        <td>:</td>
+                        <td>
+                            <select formControlName="type">
+                                <option *ngFor="let item of kpiType" [value]="item._id">{{item.type}}</option>
+                            </select><br>
+                            <span class="text-danger"
+                                *ngIf="kpiForm.controls['type'].invalid && kpiForm.controls['type'].touched">Please
+                                select KPI Type !!!</span>
+                        </td>
+                    </tr>
+
+                    <tr>
                         <td>Department ID</td>
                         <td>:</td>
                         <td>
-                            <select style="height: 30px; width: 350px;" formControlName="departmentId">
+                            <select formControlName="departmentId">
                                 <option *ngFor="let item of dept" [value]="item.id">{{item.name}}</option>
                             </select><br>
                             <span class="text-danger"
@@ -30,11 +43,12 @@
                                 select Department Id !!!</span>
                         </td>
                     </tr>
+
                     <tr>
                         <td>Perspective</td>
                         <td>:</td>
                         <td>
-                            <select style="height: 30px; width: 350px;" formControlName="perspective">
+                            <select formControlName="perspective">
                                 <option *ngFor="let item of pers" [value]="item._id">{{item.perspective}}</option>
                             </select><br>
                             <span class="text-danger"
@@ -42,32 +56,35 @@
                                 select Perspective !!!</span>
                         </td>
                     </tr>
+
                     <tr>
                         <td>Goal Description</td>
                         <td>:</td>
                         <td>
-                            <textarea name="" id="" style="height: 60px; width: 350px;" cols="30" rows="10"
+                            <textarea name="" id="" cols="30" rows="10"
                                 formControlName="goalDescription"></textarea><br>
                             <span class="text-danger"
                                 *ngIf="kpiForm.controls['goalDescription'].invalid && kpiForm.controls['goalDescription'].touched">Please
                                 add Goal Description !!!</span>
                         </td>
                     </tr>
+
                     <tr>
                         <td>Remark</td>
                         <td>:</td>
                         <td>
-                            <input style="height: 30px; width: 350px;" type="text" formControlName="remark"><br>
+                            <input type="text" formControlName="remark"><br>
                             <span class="text-danger"
                                 *ngIf="kpiForm.controls['remark'].invalid && kpiForm.controls['remark'].touched">Please
                                 add Remark !!!</span>
                         </td>
                     </tr>
+
                     <tr>
                         <td>Data Capture Frequency</td>
                         <td>:</td>
                         <td>
-                            <select style="height: 30px; width: 350px;" formControlName="dataCaptureFrequency">
+                            <select formControlName="dataCaptureFrequency">
                                 <option *ngFor="let item of dataCap" [value]="item._id">{{item.value}}</option>
                             </select><br>
                             <span class="text-danger"
@@ -75,11 +92,12 @@
                                 select Data Capture Frequency !!!</span>
                         </td>
                     </tr>
+
                     <tr>
                         <td>Review Frequency</td>
                         <td>:</td>
                         <td>
-                            <select style="height: 30px; width: 350px;" formControlName="reviewFrequency">
+                            <select formControlName="reviewFrequency">
                                 <option *ngFor="let item of filterOrder()" [value]="item._id">
                                     {{item.value}}
                                 </option>
@@ -91,10 +109,11 @@
                     </tr>
                 </tbody>
             </table>
+            <hr>
+            <div class="text-center" style="margin-bottom: 20px;">
+                <button [disabled]="!kpiForm.valid" type="submit" class="btn btn-primary">Save KPI</button>
+            </div>
         </form>
     </div>
-    <hr>
-    <div class="text-center" style="margin-bottom: 20px;">
-        <button [disabled]="!kpiForm.valid" type="submit" class="btn btn-primary">Save KPI</button>
-    </div>
+
 </div>

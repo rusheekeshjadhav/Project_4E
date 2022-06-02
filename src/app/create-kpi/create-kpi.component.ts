@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { KpiService } from '../kpi.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { KpiService } from '../kpi.service';
 })
 export class CreateKPIComponent implements OnInit {
 
-  constructor(private ks: KpiService) { }
+  constructor(private ks: KpiService, private router: Router) { }
 
   kpiForm = new FormGroup({
 
@@ -20,10 +21,10 @@ export class CreateKPIComponent implements OnInit {
     remark: new FormControl('', [Validators.required]),
     dataCaptureFrequency: new FormControl('', [Validators.required]),
     reviewFrequency: new FormControl('', [Validators.required]),
+    type: new FormControl('', [Validators.required]),
 
     financialYearStart: new FormControl(1648751400000),
     financialYearEnd: new FormControl(1680287399000),
-    type: new FormControl("606573e173d7e41e2e59a4b0"),
     category: new FormControl("5ea2c50f1d4ec94491c08030"),
     perspectivePrefix: new FormControl("I"),
     directionOfGoodness: new FormControl("Up"),
@@ -56,7 +57,7 @@ export class CreateKPIComponent implements OnInit {
     owners: new FormControl({
       "individuals": [
         {
-          "employeeId": "vikas.raut",
+          "employeeId": "rusheekesh.jadhav",
           "isPrimary": true
         }
       ]
@@ -72,6 +73,7 @@ export class CreateKPIComponent implements OnInit {
   pers: any = [];
   dataCap: any = [];
   review: any = [];
+  kpiType: any = [];
 
   ngOnInit(): void {
     this.ks.getDepartment().subscribe(data => {
@@ -101,16 +103,25 @@ export class CreateKPIComponent implements OnInit {
         this.review.push(element);
       });
     });
+
+    this.ks.getKpiType().subscribe(data => {
+      data.response.forEach((element: any) => {
+        // console.log(element);
+        this.kpiType.push(element);
+      });
+    });
   }
 
   submit() {
-    // console.log(this.kpiForm.valid);
+    console.log(this.kpiForm.valid);
     this.ks.createKPI(this.kpiForm.value).subscribe((succ) => {
       console.log(succ),
         (err: any) => {
           console.log(err);
         }
-    })
+    });
+    alert("KPI created succeccfully");
+    this.router.navigate(['/dash']);
   }
 
   checkOrder() {

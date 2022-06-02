@@ -9,6 +9,8 @@ const DEPARTMENT_API = 'https://dev-api.tqmi.io/setting-management/api/departmen
 const PERSPECTIVE_API = 'https://dev-api.tqmi.io/setting-management/api/perspectives';
 const DATA_CAPTURE_FREQUENCY_API = 'https://dev-api.tqmi.io/setting-management/api/data-capture-frequency';
 const REVIEW_FREQUENCY = 'https://dev-api.tqmi.io/setting-management/api/data-review-frequency';
+const KPI_TYPE = 'https://dev-api.tqmi.io/setting-management/api/kpi-types';
+
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +33,10 @@ export class KpiService {
 
   getReviewFrequency(): Observable<any> {
     return this.http.get(REVIEW_FREQUENCY);
+  }
+
+  getKpiType(): Observable<any>{
+    return this.http.get(KPI_TYPE);
   }
 
   createKPI(kpiForm: any): Observable<any>{

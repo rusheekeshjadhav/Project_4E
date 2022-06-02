@@ -11,6 +11,7 @@ const DATA_CAPTURE_FREQUENCY_API = 'https://dev-api.tqmi.io/setting-management/a
 const REVIEW_FREQUENCY = 'https://dev-api.tqmi.io/setting-management/api/data-review-frequency';
 const KPI_TYPE = 'https://dev-api.tqmi.io/setting-management/api/kpi-types';
 const CATEGORY = 'https://dev-api.tqmi.io/setting-management/api/kpi-categories';
+const YEAR = 'https://dev-api.tqmi.io/setting-management/api/financial-years-list';
 
 
 @Injectable({
@@ -42,6 +43,10 @@ export class KpiService {
 
   getCategory(): Observable<any>{
     return this.http.get(CATEGORY);
+  }
+
+  getYear(): Observable<any>{
+    return this.http.get(YEAR);
   }
 
   createKPI(kpiForm: any): Observable<any>{

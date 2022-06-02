@@ -8,6 +8,19 @@
                 <thead></thead>
                 <tbody>
                     <tr>
+                        <td>Financial Year</td>
+                        <td>:</td>
+                        <td>
+                            <select formControlName="financialYearStart" (change)="selectedYear()">
+                                <option *ngFor="let item of filterYear()" [value]="item.startUnix">FY {{item.start | date: 'y'}} - {{item.end | date: 'y'}}</option>
+                            </select><br>
+                            <span class="text-danger"
+                                *ngIf="kpiForm.controls['financialYearStart'].invalid && kpiForm.controls['financialYearStart'].touched">Please
+                                select Financial Year !!!</span>
+                        </td>
+                    </tr>
+
+                    <tr>
                         <td>KPI Title</td>
                         <td>:</td>
                         <td>
@@ -74,6 +87,7 @@
                         <td>Perspective Prefix</td>
                         <td>:</td>
                         <td>
+                            <!-- <div formControlName="perspectivePrefix">" {{perspectivePrefix}} "</div> -->
                             <input readonly=true type="text" value="{{perspectivePrefix}}" formControlName="perspectivePrefix"><br>
                         </td>
                     </tr>

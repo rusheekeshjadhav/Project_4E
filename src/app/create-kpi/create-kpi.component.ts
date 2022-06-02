@@ -23,10 +23,15 @@ export class CreateKPIComponent implements OnInit {
     reviewFrequency: new FormControl('', [Validators.required]),
     type: new FormControl('', [Validators.required]),
     category: new FormControl('', [Validators.required]),
-    perspectivePrefix: new FormControl('', [Validators.required]),
+    perspectivePrefix: new FormControl(''),
+    financialYearStart: new FormControl('', [Validators.required]),
+    financialYearEnd: new FormControl('', [Validators.required]),
 
-    financialYearStart: new FormControl(1648751400000),
-    financialYearEnd: new FormControl(1680287399000),
+
+    // financialYearStart: new FormControl(1648751400000),
+    // financialYearEnd: new FormControl(1680287399000),
+
+
     directionOfGoodness: new FormControl("Up"),
     isTypeKPI: new FormControl(true),
     annualTarget: new FormControl(100),
@@ -75,6 +80,7 @@ export class CreateKPIComponent implements OnInit {
   review: any = [];
   kpiType: any = [];
   kpiCategory: any = [];
+  years: any = [];
 
   perspectivePrefix: string = '';
 
@@ -88,7 +94,7 @@ export class CreateKPIComponent implements OnInit {
 
     this.ks.getPerspective().subscribe(data => {
       data.response.forEach((element: any) => {
-        console.log(element);
+        // console.log(element);
         this.pers.push(element);
       });
     });
@@ -120,6 +126,13 @@ export class CreateKPIComponent implements OnInit {
         this.kpiCategory.push(element);
       });
     });
+
+    this.ks.getYear().subscribe(data => {
+      data.response.forEach((element: any) => {
+        // console.log(element);
+        this.years.push(element);
+      });
+    });
   }
 
   submit() {
@@ -130,8 +143,20 @@ export class CreateKPIComponent implements OnInit {
           console.log(err);
         }
     });
-    alert("KPI created succeccfully");
+    alert("KPI Created Succeccfully !!!");
     this.router.navigate(['/dash']);
+  }
+
+  setPerspectivePrefix() {
+    this.perspectivePrefix = this.pers.find((element: { _id: any; }) => {
+      return element._id === this.kpiForm.value['perspective'];
+    }).perspectivePrefix;
+  }
+
+  selectedYear() {
+    this.kpiForm.value['financialYearEnd'] = this.years.find((element: { startUnix: any; }) => {
+      return element.startUnix == this.kpiForm.value['financialYearStart'];
+    }).endUnix;
   }
 
   checkOrder() {
@@ -140,14 +165,12 @@ export class CreateKPIComponent implements OnInit {
     }).order;
   }
 
-  setPerspectivePrefix(){
-    this.perspectivePrefix = this.pers.find((element: { _id: any; }) => {
-      return element._id === this.kpiForm.value['perspective'];
-    }).perspectivePrefix;
-  }
-
   filterOrder() {
     if (this.kpiForm.value['dataCaptureFrequency'] !== '')
       return this.review.filter((x: { order: number; }) => x.order >= this.checkOrder());
+  }
+
+  filterYear() {
+    return this.years.filter((x: { endUnix: number; }) => x.endUnix >= (new Date()).getTime());
   }
 }

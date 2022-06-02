@@ -5,6 +5,7 @@ import { Observable, observable } from 'rxjs';
 const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
 const CREATE_API = 'https://dev-api.tqmi.io/org-goal-management/api/goal';
+const LIST = 'https://dev-api.tqmi.io/org-goal-management/api/goal/get-kpi-list-given-date-range?start=1648751400000&end=1680287399000&includeViewOnly=true';
 const DEPARTMENT_API = 'https://dev-api.tqmi.io/setting-management/api/departments';
 const PERSPECTIVE_API = 'https://dev-api.tqmi.io/setting-management/api/perspectives';
 const DATA_CAPTURE_FREQUENCY_API = 'https://dev-api.tqmi.io/setting-management/api/data-capture-frequency';
@@ -51,5 +52,9 @@ export class KpiService {
 
   createKPI(kpiForm: any): Observable<any>{
     return this.http.post(CREATE_API, kpiForm, httpOptions);
+  }
+
+  listKPI(): Observable<any>{
+    return this.http.get(LIST);
   }
 }

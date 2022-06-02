@@ -14,6 +14,7 @@ import { AuthInterceptor, authInterceptorProviders } from './auth.interceptor';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CreateKPIComponent } from './create-kpi/create-kpi.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { DetailsKpiComponent } from './details-kpi/details-kpi.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     SignupComponent,
     PieComponent,
     NavbarComponent,
-    CreateKPIComponent
+    CreateKPIComponent,
+    DetailsKpiComponent
   ],
   imports: [
     BrowserModule,

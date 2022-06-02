@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth.guard';
 import { CreateKPIComponent } from './create-kpi/create-kpi.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DetailsKpiComponent } from './details-kpi/details-kpi.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 
@@ -29,6 +30,11 @@ const routes: Routes = [
   {
     path: 'createkpi',
     component: CreateKPIComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'detailskpi',
+    component: DetailsKpiComponent,
     canActivate: [AuthGuard]
   }];
 

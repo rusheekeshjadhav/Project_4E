@@ -12,7 +12,8 @@
                         <td>:</td>
                         <td>
                             <select formControlName="financialYearStart" (change)="selectedYear()">
-                                <option *ngFor="let item of filterYear()" [value]="item.startUnix">FY {{item.start | date: 'y'}} - {{item.end | date: 'y'}}</option>
+                                <option *ngFor="let item of filterYear()" [value]="item.startUnix">FY {{item.start |
+                                    date: 'y'}} - {{item.end | date: 'y'}}</option>
                             </select><br>
                             <span class="text-danger"
                                 *ngIf="kpiForm.controls['financialYearStart'].invalid && kpiForm.controls['financialYearStart'].touched">Please
@@ -88,7 +89,8 @@
                         <td>:</td>
                         <td>
                             <!-- <div formControlName="perspectivePrefix">" {{perspectivePrefix}} "</div> -->
-                            <input readonly=true type="text" value="{{perspectivePrefix}}" formControlName="perspectivePrefix"><br>
+                            <input readonly=true type="text" value="{{perspectivePrefix}}"
+                                formControlName="perspectivePrefix"><br>
                         </td>
                     </tr>
 
@@ -140,6 +142,16 @@
                             <span class="text-danger"
                                 *ngIf="kpiForm.controls['reviewFrequency'].invalid && kpiForm.controls['reviewFrequency'].touched">Please
                                 select Review Frequency !!!</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Select Months</td>
+                        <td>:</td>
+                        <td>
+                            <ng-multiselect-dropdown [placeholder]="'Select Months'" [settings]="dropdownSettings"
+                                [data]="dropdownList" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                            </ng-multiselect-dropdown>
                         </td>
                     </tr>
                 </tbody>

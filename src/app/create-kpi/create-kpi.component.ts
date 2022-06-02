@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { KpiService } from '../kpi.service';
 
 @Component({
@@ -84,6 +85,10 @@ export class CreateKPIComponent implements OnInit {
 
   perspectivePrefix: string = '';
 
+  dropdownList: any = [];
+  selectedItems: any = [];
+  dropdownSettings: IDropdownSettings = {};
+
   ngOnInit(): void {
     this.ks.getDepartment().subscribe(data => {
       data.response.forEach((element: any) => {
@@ -133,6 +138,32 @@ export class CreateKPIComponent implements OnInit {
         this.years.push(element);
       });
     });
+
+
+    this.dropdownList = [
+      { item_id: 1, item_text: 'January' },
+      { item_id: 2, item_text: 'February' },
+      { item_id: 3, item_text: 'March' },
+      { item_id: 4, item_text: 'April' },
+      { item_id: 5, item_text: 'May' },
+      { item_id: 6, item_text: 'June' },
+      { item_id: 7, item_text: 'July' },
+      { item_id: 8, item_text: 'August' },
+      { item_id: 9, item_text: 'September' },
+      { item_id: 10, item_text: 'October' },
+      { item_id: 11, item_text: 'November' },
+      { item_id: 12, item_text: 'December' }
+    ];
+    this.selectedItems = [];
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'item_id',
+      textField: 'item_text',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
   }
 
   submit() {
@@ -167,10 +198,20 @@ export class CreateKPIComponent implements OnInit {
 
   filterOrder() {
     if (this.kpiForm.value['dataCaptureFrequency'] !== '')
-      return this.review.filter((x: { order: number; }) => x.order >= this.checkOrder());
+      if (this.checkOrder() < 5)
+        return this.review.filter((x: { order: number; }) => x.order > this.checkOrder());
+      else
+        return this.review.filter((x: { order: number; }) => x.order > (this.checkOrder()-1));
   }
 
   filterYear() {
     return this.years.filter((x: { endUnix: number; }) => x.endUnix >= (new Date()).getTime());
+  }
+
+  onItemSelect(item: any) {
+    console.log(item);
+  }
+  onSelectAll(items: any) {
+    console.log(items);
   }
 }

@@ -13,6 +13,7 @@ import { PieComponent } from './pie/pie.component';
 import { AuthInterceptor, authInterceptorProviders } from './auth.interceptor';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CreateKPIComponent } from './create-kpi/create-kpi.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { CreateKPIComponent } from './create-kpi/create-kpi.component';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    NgChartsModule
+    NgChartsModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [authInterceptorProviders, HttpClient],
   bootstrap: [AppComponent]

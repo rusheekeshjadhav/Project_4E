@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { KpiService } from '../kpi.service';
 
 @Component({
@@ -25,12 +24,9 @@ export class CreateKPIComponent implements OnInit {
     type: new FormControl('', [Validators.required]),
     category: new FormControl('', [Validators.required]),
     perspectivePrefix: new FormControl(''),
-    financialYearStart: new FormControl('', [Validators.required]),
-    financialYearEnd: new FormControl('', [Validators.required]),
+    financialYearStart: new FormControl('0', [Validators.required]),
+    financialYearEnd: new FormControl(''),
 
-
-    // financialYearStart: new FormControl(1648751400000),
-    // financialYearEnd: new FormControl(1680287399000),
 
 
     directionOfGoodness: new FormControl("Up"),
@@ -46,19 +42,21 @@ export class CreateKPIComponent implements OnInit {
     dataAggregationFrequency: new FormControl("62833d7b412ac9eebe3a3c17"),
     dataAggregationMethod: new FormControl("SUM"),
 
-    captureData: new FormControl([
-      {
-        "target": 0,
-        "lower": 0,
-        "upper": 0,
-        "startDate": "2022-05-01T00:00:00",
-        "endDate": "2022-05-31T23:59:59",
-        "indicator": 2,
-        "disabled": false,
-        "upperValueType": "ABSOLUTE",
-        "lowerValueType": "ABSOLUTE"
-      }
-    ]),
+    captureData: new FormArray([]),
+
+    // captureData: new FormControl([
+    //   {
+    //     "target": 0,
+    //     "lower": 0,
+    //     "upper": 0,
+    //     "startDate": "2022-05-01T00:00:00",
+    //     "endDate": "2022-05-31T23:59:59",
+    //     "indicator": 2,
+    //     "disabled": false,
+    //     "upperValueType": "ABSOLUTE",
+    //     "lowerValueType": "ABSOLUTE"
+    //   }
+    // ]),
 
     owners: new FormControl({
       "individuals": [
@@ -83,16 +81,30 @@ export class CreateKPIComponent implements OnInit {
   kpiCategory: any = [];
   years: any = [];
 
+  months: any[] = [
+    { id: 1, name: "JAN" },
+    { id: 2, name: "FEB" },
+    { id: 3, name: "MAR" },
+    { id: 4, name: "APR" },
+    { id: 5, name: "MAY" },
+    { id: 6, name: "JUN" },
+    { id: 7, name: "JUL" },
+    { id: 8, name: "AUG" },
+    { id: 9, name: "SEP" },
+    { id: 10, name: "OCT" },
+    { id: 11, name: "NOV" },
+    { id: 12, name: "DEC" }
+  ];
+
+  selected: any[] = [];
+
   perspectivePrefix: string = '';
 
-  dropdownList: any = [];
-  selectedItems: any = [];
-  dropdownSettings: IDropdownSettings = {};
 
   ngOnInit(): void {
     this.ks.getDepartment().subscribe(data => {
       data.response.forEach((element: any) => {
-        // console.log(element.name+" "+element.id);
+        // console.log(typeof element+" "+element.name+" "+element.id);
         this.dept.push(element);
       });
     });
@@ -139,42 +151,19 @@ export class CreateKPIComponent implements OnInit {
       });
     });
 
-
-    this.dropdownList = [
-      { item_id: 1, item_text: 'January' },
-      { item_id: 2, item_text: 'February' },
-      { item_id: 3, item_text: 'March' },
-      { item_id: 4, item_text: 'April' },
-      { item_id: 5, item_text: 'May' },
-      { item_id: 6, item_text: 'June' },
-      { item_id: 7, item_text: 'July' },
-      { item_id: 8, item_text: 'August' },
-      { item_id: 9, item_text: 'September' },
-      { item_id: 10, item_text: 'October' },
-      { item_id: 11, item_text: 'November' },
-      { item_id: 12, item_text: 'December' }
-    ];
-    this.selectedItems = [];
-    this.dropdownSettings = {
-      singleSelection: false,
-      idField: 'item_id',
-      textField: 'item_text',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 3,
-      allowSearchFilter: true
-    };
   }
 
   submit() {
-    console.log(this.kpiForm.valid);
+    // console.log(this.kpiForm.valid);
     this.ks.createKPI(this.kpiForm.value).subscribe((succ) => {
-      console.log(succ),
-        (err: any) => {
-          console.log(err);
-        }
-    });
-    alert("KPI Created Succeccfully !!!");
+      console.log(succ);
+      alert("KPI Created Succeccfully !!!");
+    },
+      (err) => {
+        console.log(err);
+        alert("KPI Creation Failed !!!");
+      });
+    // alert("KPI Created Succeccfully !!!");
     this.router.navigate(['/dash']);
   }
 
@@ -182,12 +171,19 @@ export class CreateKPIComponent implements OnInit {
     this.perspectivePrefix = this.pers.find((element: { _id: any; }) => {
       return element._id === this.kpiForm.value['perspective'];
     }).perspectivePrefix;
+    // console.log(this.perspectivePrefix)
+    // this.kpiForm.value['perspectivePrefix'] = this.perspectivePrefix;
+
+    this.kpiForm.controls['perspectivePrefix'].setValue(this.perspectivePrefix);
+    console.log(this.kpiForm.value);
   }
 
   selectedYear() {
-    this.kpiForm.value['financialYearEnd'] = this.years.find((element: { startUnix: any; }) => {
+    this.kpiForm.controls['financialYearEnd'].setValue(this.years.find((element: { startUnix: any; }) => {
       return element.startUnix == this.kpiForm.value['financialYearStart'];
-    }).endUnix;
+    }).endUnix.toString());
+    // console.log(this.kpiForm.value['financialYearEnd']);
+    console.log(this.kpiForm.value);
   }
 
   checkOrder() {
@@ -201,17 +197,37 @@ export class CreateKPIComponent implements OnInit {
       if (this.checkOrder() < 5)
         return this.review.filter((x: { order: number; }) => x.order > this.checkOrder());
       else
-        return this.review.filter((x: { order: number; }) => x.order > (this.checkOrder()-1));
+        return this.review.filter((x: { order: number; }) => x.order > (this.checkOrder() - 1));
   }
 
   filterYear() {
     return this.years.filter((x: { endUnix: number; }) => x.endUnix >= (new Date()).getTime());
   }
 
-  onItemSelect(item: any) {
-    console.log(item);
+  createFormArrayData(): FormGroup {
+    let captureDataFormGroup = new FormGroup({
+      target: new FormControl(0),
+      lower: new FormControl(0),
+      upper: new FormControl(0),
+      startDate: new FormControl('2022-05-01T00:00:00'),
+      endDate: new FormControl('2022-05-31T23:59:59'),
+      indicator: new FormControl(2),
+      disabled: new FormControl(false),
+      upperValueType: new FormControl('ABSOLUTE'),
+      lowerValueType: new FormControl('ABSOLUTE')
+    });
+
+    return captureDataFormGroup;
   }
-  onSelectAll(items: any) {
-    console.log(items);
+
+  addData($event: any){
+    this.captureData.push(this.createFormArrayData());
+    // console.log(this.selected);
   }
+
+  get captureData(){
+    return this.kpiForm.get('captureData') as FormArray;
+  }
+
+
 }

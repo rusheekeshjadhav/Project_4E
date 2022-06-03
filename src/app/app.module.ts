@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { SignupComponent } from './signup/signup.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -15,6 +15,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { CreateKPIComponent } from './create-kpi/create-kpi.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { DetailsKpiComponent } from './details-kpi/details-kpi.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,9 @@ import { DetailsKpiComponent } from './details-kpi/details-kpi.component';
     AppRoutingModule,
     HttpClientModule,
     NgChartsModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    FormsModule,
+    NgSelectModule
   ],
   providers: [authInterceptorProviders, HttpClient],
   bootstrap: [AppComponent]

@@ -38,23 +38,25 @@ export class KpiService {
     return this.http.get(REVIEW_FREQUENCY);
   }
 
-  getKpiType(): Observable<any>{
+  getKpiType(): Observable<any> {
     return this.http.get(KPI_TYPE);
   }
 
-  getCategory(): Observable<any>{
+  getCategory(): Observable<any> {
     return this.http.get(CATEGORY);
   }
 
-  getYear(): Observable<any>{
+  getYear(): Observable<any> {
     return this.http.get(YEAR);
   }
 
-  createKPI(kpiForm: any): Observable<any>{
+  createKPI(kpiForm: any): Observable<any> {
+    console.log(kpiForm);
+    // console.log("in create post");
     return this.http.post(CREATE_API, kpiForm, httpOptions);
   }
 
-  listKPI(): Observable<any>{
+  listKPI(): Observable<any> {
     return this.http.get(LIST);
   }
 }

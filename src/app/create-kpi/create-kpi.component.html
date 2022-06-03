@@ -1,10 +1,10 @@
 <app-navbar></app-navbar>
 
 <div class="row">
-    <div class="col-4">4E Org</div>
+    <div style="padding-left: 20px;" class="col-4">4E Org</div>
     <div class="col">
         <form [formGroup]="kpiForm" (ngSubmit)="submit()" style="outline: auto; margin: 20px; padding: 20px;">
-            <table>
+            <table class="center">
                 <thead></thead>
                 <tbody>
                     <tr>
@@ -89,8 +89,7 @@
                         <td>:</td>
                         <td>
                             <!-- <div formControlName="perspectivePrefix">" {{perspectivePrefix}} "</div> -->
-                            <input readonly=true type="text" value="{{perspectivePrefix}}"
-                                formControlName="perspectivePrefix"><br>
+                            <input readonly=true value="{{perspectivePrefix}}"><br>
                         </td>
                     </tr>
 
@@ -149,9 +148,50 @@
                         <td>Select Months</td>
                         <td>:</td>
                         <td>
-                            <ng-multiselect-dropdown [placeholder]="'Select Months'" [settings]="dropdownSettings"
-                                [data]="dropdownList" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
-                            </ng-multiselect-dropdown>
+                            <ng-select [items]="months" bindLabel="name" bindValue="id" placeholder="Select Month"
+                                appendTo="body" [multiple]="true" [(ngModel)]="selected" style="width: 350px;"
+                                [ngModelOptions]="{standalone: true}" (add)="addData($event)">
+                            </ng-select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <div formArrayName="captureData" *ngFor="let item of selected; let i = index">
+                                <hr>
+                                <div style="outline: auto;" formGroupName="{{i}}">
+                                    <div style="text-align: center; padding-top: 10px;">{{ months[selected[i]-1].name }}
+                                    </div>
+                                    <hr>
+                                    <table class="center">
+                                        <tbody>
+                                            <tr>
+                                                <td>Target</td>
+                                                <td>:</td>
+                                                <td>
+                                                    <input id="{{'target' + i}}" formControlName="target" style="width: 100px;" type="number">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Lower</td>
+                                                <td>:</td>
+                                                <td>
+                                                    <input id="{{'lower' + i}}" formControlName="lower" style="width: 100px;" type="number">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Upper</td>
+                                                <td>:</td>
+                                                <td>
+                                                    <input id="{{'upper' + i}}" formControlName="upper" style="width: 100px;" type="number">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
                         </td>
                     </tr>
                 </tbody>

@@ -12,7 +12,7 @@ export class DetailsKpiComponent implements OnInit {
 
   list: any = [];
   show: boolean = false;
-  elem: any = [];
+  elementArray: any = [];
 
   ngOnInit(): void {
     this.ks.listKPI().subscribe(data => {
@@ -21,13 +21,17 @@ export class DetailsKpiComponent implements OnInit {
         // console.log(typeof element);
         this.list.push(element);
       });
+      console.log(this.list);
     });
   }
 
   showDetails($event: any) {
-    this.elem = [];
+    this.elementArray = [];
     this.show = !this.show;
-    this.elem.push($event);
+
+    this.elementArray.push($event);
+    // console.log($event._id);
+    // console.log(this.elementArray);
   }
 
 }

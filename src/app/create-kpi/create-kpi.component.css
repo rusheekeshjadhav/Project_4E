@@ -1,15 +1,30 @@
-td{
-    padding-top: 10px; padding-bottom: 10px; padding-left: 30px; padding-right: 30px;
+td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
-div{
+
+div {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
-input{
-    height: 30px; width: 350px;
+
+input {
+    height: 30px;
+    width: 350px;
 }
-textarea{
-    height: 60px; width: 350px;
+
+textarea {
+    height: 60px;
+    width: 350px;
 }
-select{
-    height: 30px; width: 350px;
+
+select {
+    height: 30px;
+    width: 350px;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
 }

@@ -5,6 +5,7 @@ import { AuthGuard } from './auth.guard';
 import { CreateKPIComponent } from './create-kpi/create-kpi.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailsKpiComponent } from './details-kpi/details-kpi.component';
+import { DisplayKpiComponent } from './display-kpi/display-kpi.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 
@@ -33,8 +34,8 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'detailskpi',
-    component: DetailsKpiComponent,
+    path: 'displaykpi',
+    component: DisplayKpiComponent,
     canActivate: [AuthGuard]
   }];
 

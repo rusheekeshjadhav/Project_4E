@@ -16,6 +16,8 @@ import { CreateKPIComponent } from './create-kpi/create-kpi.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { DetailsKpiComponent } from './details-kpi/details-kpi.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ListKpiComponent } from './list-kpi/list-kpi.component';
+import { DisplayKpiComponent } from './display-kpi/display-kpi.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
     PieComponent,
     NavbarComponent,
     CreateKPIComponent,
-    DetailsKpiComponent
+    DetailsKpiComponent,
+    ListKpiComponent,
+    DisplayKpiComponent
   ],
   imports: [
     BrowserModule,

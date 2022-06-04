@@ -1,0 +1,30 @@
+<div class="card" style="margin: 10px;" *ngFor="let item of list">
+    <div class="card-body">
+        <h5 class="card-title" style="text-align: center;">{{item.title.toUpperCase()}}</h5>
+        <hr>
+        <table class="center">
+            <thead></thead>
+            <tbody>
+                <tr>
+                    <td class="td1">Owner Employee ID</td>
+                    <td class="td1">:</td>
+                    <td class="td1">{{item.ownerEmployeeId}}</td>
+                </tr>
+                <tr>
+                    <td class="td1">Owner Employee Name</td>
+                    <td class="td1">:</td>
+                    <td class="td1">{{item.ownerFirstname}} {{item.ownerLastname}}</td>
+                </tr>
+                <tr>
+                    <td class="td1">Owner Supervisor ID</td>
+                    <td class="td1">:</td>
+                    <td class="td1">{{item.ownerSupervisorId}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <div style="text-align: center;">
+            <button class="btn btn-primary" (click)="showDetails(item)">Show Details</button>
+        </div>
+    </div>
+</div>

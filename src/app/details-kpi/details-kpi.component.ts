@@ -15,20 +15,12 @@ export class DetailsKpiComponent implements OnInit {
   elementArray: any = [];
 
   ngOnInit(): void {
-    this.ks.listKPI().subscribe(data => {
-      data.response.forEach((element: any) => {
-        // console.log(element);
-        // console.log(typeof element);
-        this.list.push(element);
-      });
-      console.log(this.list);
-    });
   }
 
   showDetails($event: any) {
+    // console.log($event)
     this.elementArray = [];
-    this.show = !this.show;
-
+    this.show = true;
     this.elementArray.push($event);
     // console.log($event._id);
     // console.log(this.elementArray);

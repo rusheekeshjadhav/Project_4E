@@ -14,6 +14,8 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  user = this.ts.decodeToken();
+
   logout() {
     this.ts.clearToken();
     this.router.navigate(['/signin']);

@@ -1,7 +1,6 @@
-<app-navbar></app-navbar>
 <div class="row">
     <div class="col-4">
-        <div class="card" *ngFor="let item of list">
+        <div class="card" style="margin: 10px;" *ngFor="let item of list">
             <div class="card-body">
                 <h5 class="card-title" style="text-align: center;">{{item.title.toUpperCase()}}</h5>
                 <hr>
@@ -33,7 +32,7 @@
         </div>
     </div>
     <div class="col-8">
-        <div class="card" *ngIf="show">
+        <div class="card" style="margin-top: 10px;" *ngIf="show">
             <div class="card-body" *ngFor="let item of elementArray">
                 <h3 style="text-align: center;">{{item.title.toUpperCase()}}</h3>
                 <hr>
@@ -61,7 +60,7 @@
                             <td>{{item.ownerSupervisorId}}</td>
                         </tr>
                         <tr>
-                            <td>Financial Year Year</td>
+                            <td>Financial Year</td>
                             <td>:</td>
                             <td>{{item.financialYearStart | date: 'y'}} - {{item.financialYearEnd | date: 'y'}}</td>
                         </tr>

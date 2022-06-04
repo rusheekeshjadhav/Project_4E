@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { KpiService } from '../kpi.service';
+import { TokenService } from '../token.service';
 
 @Component({
   selector: 'app-create-kpi',
@@ -10,7 +11,7 @@ import { KpiService } from '../kpi.service';
 })
 export class CreateKPIComponent implements OnInit {
 
-  constructor(private ks: KpiService, private router: Router) { }
+  constructor(private ks: KpiService, private ts: TokenService, private router: Router) { }
 
   kpiForm = new FormGroup({
 
@@ -58,14 +59,7 @@ export class CreateKPIComponent implements OnInit {
     //   }
     // ]),
 
-    owners: new FormControl({
-      "individuals": [
-        {
-          "employeeId": "rusheekesh.jadhav",
-          "isPrimary": true
-        }
-      ]
-    }),
+    owners: new FormControl(''),
 
     viewers: new FormControl({
       "individuals": [],
@@ -102,6 +96,16 @@ export class CreateKPIComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.kpiForm.controls['owners'].setValue({
+      "individuals": [
+        {
+          "employeeId": this.ts.decodeToken().employeeId,
+          "isPrimary": true
+        }
+      ]
+    });
+
     this.ks.getDepartment().subscribe(data => {
       data.response.forEach((element: any) => {
         // console.log(typeof element+" "+element.name+" "+element.id);
@@ -175,7 +179,7 @@ export class CreateKPIComponent implements OnInit {
     // this.kpiForm.value['perspectivePrefix'] = this.perspectivePrefix;
 
     this.kpiForm.controls['perspectivePrefix'].setValue(this.perspectivePrefix);
-    console.log(this.kpiForm.value);
+    // console.log(this.kpiForm.value);
   }
 
   selectedYear() {
@@ -220,12 +224,12 @@ export class CreateKPIComponent implements OnInit {
     return captureDataFormGroup;
   }
 
-  addData($event: any){
+  addData($event: any) {
     this.captureData.push(this.createFormArrayData());
     // console.log(this.selected);
   }
 
-  get captureData(){
+  get captureData() {
     return this.kpiForm.get('captureData') as FormArray;
   }
 

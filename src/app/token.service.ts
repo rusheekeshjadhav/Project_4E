@@ -17,7 +17,7 @@ export class TokenService {
 
   getToken(): string | null {
     // console.log(localStorage.getItem("token"));
-    if (localStorage.getItem("token") !== null)
+    if (this.checked)
       return localStorage.getItem("token");
     else
       return sessionStorage.getItem("token");
@@ -33,12 +33,14 @@ export class TokenService {
     if (this.checked)
       localStorage.setItem("token", token.response);
     else
-    sessionStorage.setItem("token", token.response);
+      sessionStorage.setItem("token", token.response);
   }
 
   clearToken() {
-    localStorage.clear();
-    sessionStorage.clear();
+    if (this.checked)
+      localStorage.clear();
+    else
+      sessionStorage.clear();
     this.checked = false;
   }
 }

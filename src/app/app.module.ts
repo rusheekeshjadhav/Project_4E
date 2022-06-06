@@ -19,6 +19,11 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ListKpiComponent } from './list-kpi/list-kpi.component';
 import { DisplayKpiComponent } from './display-kpi/display-kpi.component';
 import { HierarchyComponent } from './hierarchy/hierarchy.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTreeModule } from '@angular/material/tree';
+import {MatIconModule} from '@angular/material/icon';
+
+
 
 @NgModule({
   declarations: [
@@ -42,7 +47,10 @@ import { HierarchyComponent } from './hierarchy/hierarchy.component';
     NgChartsModule,
     NgMultiSelectDropDownModule.forRoot(),
     FormsModule,
-    NgSelectModule
+    NgSelectModule,
+    BrowserAnimationsModule,
+    MatTreeModule,
+    MatIconModule
   ],
   providers: [authInterceptorProviders, HttpClient],
   bootstrap: [AppComponent]

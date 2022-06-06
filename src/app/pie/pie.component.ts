@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { HierarchyNode } from '../hierarchy/hierarchy.component';
 
 @Component({
   selector: 'app-pie',
@@ -15,12 +16,16 @@ export class PieComponent {
     responsive: true
   }
 
-  pieChartLabels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY'];
+  @Input() dataNode!: any;
+  
+
+  pieChartLabels = ['Not Defined KPI', 'Monitored KPI', 'Not Monitored KPI', 'Not On Track KPI', 'On Track KPI'];
 
   // CHART COLOR.
   pieChartColor: any = [
     {
-      backgroundColor: ['rgba(30, 169, 224, 0.8)',
+      backgroundColor: [
+        'rgba(30, 169, 224, 0.8)',
         'rgba(255,165,0,0.9)',
         'rgba(139, 136, 136, 0.9)',
         'rgba(255, 161, 181, 0.9)',
@@ -29,25 +34,16 @@ export class PieComponent {
     }
   ]
 
-  pieChartData: any = [
-    {
-      data: [10, 40, 20, 60, 50]
-    }
-  ];
+  pieChartData: any = [];
 
   ngOnInit() {
-    this.httpService.get('./assets/sales.json', { responseType: 'json' }).subscribe(
-      (data) => {
-        this.pieChartData = data as any[];	 // FILL THE CHART ARRAY WITH DATA.
-      },
-      (err: HttpErrorResponse) => {
-        console.log(err.message);
-      }
-    );
+    this.pieChartData.push({
+      data: [this.dataNode.notDefinedKPI, this.dataNode.kpiMonitored, this.dataNode.notMonitored, this.dataNode.notOnTrack, this.dataNode.onTrack]
+    });
   }
 
   onChartClick(event: any) {
-    console.log(event);
+    console.log(this.dataNode);
   }
 
 }

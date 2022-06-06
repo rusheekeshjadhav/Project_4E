@@ -17,11 +17,12 @@
                             {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                         </mat-icon>
                     </button>
-                    <p style="margin: 5px; margin-left: 10px;">{{node.primaryUserId}}</p>
+                    <p>{{node.primaryUserId}}</p>
                 </div>
                 <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
                     <ng-container matTreeNodeOutlet>
-                        <app-pie [dataNode] = node></app-pie>
+                        <p>Total KPI: {{node.total}}</p>
+                        <app-pie [dataNode]=node></app-pie>
                     </ng-container>
                 </ul>
             </li>

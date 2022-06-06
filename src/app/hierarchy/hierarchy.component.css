@@ -9,6 +9,7 @@
     list-style-type: none;
 }
 
-div {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+p {
+    margin: 5px;
+    margin-left: 10px;
 }

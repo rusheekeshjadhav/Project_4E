@@ -28,6 +28,11 @@
                 <input type="password" formControlName="password" placeholder="Enter your password here"
                     class="form-control" id="password">
             </div>
+            <div class="mb-3">
+                <input style="margin-right: 10px;" [checked]="false" (change)="toggleCheck()" type="checkbox"
+                    class="form-check-input" id="remember">
+                <label for="exampleInputPassword1" class="form-label">Remember Me</label>
+            </div>
             <div class="text-center">
                 <button [disabled]="!checkValid()" type="submit" class="btn btn-primary">Signin</button>
             </div>

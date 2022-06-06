@@ -37,12 +37,12 @@ export class PieComponent {
 
   ngOnInit() {
     this.httpService.get('./assets/sales.json', { responseType: 'json' }).subscribe(
-      data => {
+      (data) => {
         this.pieChartData = data as any[];	 // FILL THE CHART ARRAY WITH DATA.
       },
-      // (err: HttpErrorResponse) => {
-      //   console.log(err.message);
-      // }
+      (err: HttpErrorResponse) => {
+        console.log(err.message);
+      }
     );
   }
 

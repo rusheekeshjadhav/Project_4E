@@ -12,7 +12,8 @@ import { TokenService } from '../token.service';
 export class LoginComponent implements OnInit {
 
   constructor(private ls: LoginService, private ts: TokenService, private router: Router) { }
-  
+
+
   ngOnInit(): void {
     if (this.ts.getToken() !== null)
       this.router.navigate(['/dash']);
@@ -31,6 +32,7 @@ export class LoginComponent implements OnInit {
       this.ls.signin(this.myForm.value.email, this.myForm.value.password).subscribe(data => {
         // console.log(data);
         // console.log(typeof data);
+        // console.log(this.ts.checked)
         this.ts.saveToken(data);
         this.router.navigate(['/dash']);
       });
@@ -38,5 +40,10 @@ export class LoginComponent implements OnInit {
 
   checkValid() {
     return this.myForm.valid;
+  }
+
+  toggleCheck(): void {
+    this.ts.checked = !this.ts.checked;
+    // console.log(this.ts.checked);
   }
 }

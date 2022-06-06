@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -14,6 +14,8 @@ const REVIEW_FREQUENCY = environment.URL+'/setting-management/api/data-review-fr
 const KPI_TYPE = environment.URL+'/setting-management/api/kpi-types';
 const CATEGORY = environment.URL+'/setting-management/api/kpi-categories';
 const YEAR = environment.URL+'/setting-management/api/financial-years-list';
+
+const HIERARCHY = environment.URL+'/org-goal-management/api/kpi/hierarchical-users-kpi-status';
 
 
 @Injectable({
@@ -59,5 +61,18 @@ export class KpiService {
 
   listKPI(): Observable<any> {
     return this.http.get(LIST);
+  }
+  
+  getHierarchy(): Observable<any>{
+    let queryParams = new HttpParams();
+
+    queryParams=queryParams.append('employeeid','vikas.raut');
+    queryParams=queryParams.append('fyStartDate','1648751400000');
+    queryParams=queryParams.append('fyEndDate','1680287399000');
+    queryParams=queryParams.append('groupby','kpi');
+    queryParams=queryParams.append('kpiType','606573e173d7e41e2e59a4b1,606573e173d7e41e2e59a4b0,61ab4d8127d6319a5950235d,61ab4da827d6319a5950235e');
+    queryParams=queryParams.append('aggregate','false');
+    
+    return this.http.get(HIERARCHY,{params:queryParams});
   }
 }

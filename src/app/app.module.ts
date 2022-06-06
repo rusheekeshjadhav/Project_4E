@@ -18,6 +18,7 @@ import { DetailsKpiComponent } from './details-kpi/details-kpi.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ListKpiComponent } from './list-kpi/list-kpi.component';
 import { DisplayKpiComponent } from './display-kpi/display-kpi.component';
+import { HierarchyComponent } from './hierarchy/hierarchy.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { DisplayKpiComponent } from './display-kpi/display-kpi.component';
     CreateKPIComponent,
     DetailsKpiComponent,
     ListKpiComponent,
-    DisplayKpiComponent
+    DisplayKpiComponent,
+    HierarchyComponent
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,8 @@ export class TokenService {
 
   constructor() { }
 
+  checked: boolean = false;
+
   isTokenExpired(token: string) {
     const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
     return (Math.floor((new Date).getTime() / 1000)) >= expiry;
@@ -15,7 +17,10 @@ export class TokenService {
 
   getToken(): string | null {
     // console.log(localStorage.getItem("token"));
-    return localStorage.getItem("token");
+    if (localStorage.getItem("token") !== null)
+      return localStorage.getItem("token");
+    else
+      return sessionStorage.getItem("token");
   }
 
   decodeToken(): any {
@@ -25,10 +30,15 @@ export class TokenService {
   }
 
   saveToken(token: any) {
-    localStorage.setItem("token", token.response);
+    if (this.checked)
+      localStorage.setItem("token", token.response);
+    else
+    sessionStorage.setItem("token", token.response);
   }
 
   clearToken() {
     localStorage.clear();
+    sessionStorage.clear();
+    this.checked = false;
   }
 }

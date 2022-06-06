@@ -6,6 +6,7 @@ import { CreateKPIComponent } from './create-kpi/create-kpi.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailsKpiComponent } from './details-kpi/details-kpi.component';
 import { DisplayKpiComponent } from './display-kpi/display-kpi.component';
+import { HierarchyComponent } from './hierarchy/hierarchy.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 
@@ -36,6 +37,11 @@ const routes: Routes = [
   {
     path: 'displaykpi',
     component: DisplayKpiComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'hierarchy',
+    component: HierarchyComponent,
     canActivate: [AuthGuard]
   }];
 

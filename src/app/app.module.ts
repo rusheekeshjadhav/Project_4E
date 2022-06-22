@@ -21,7 +21,7 @@ import { DisplayKpiComponent } from './display-kpi/display-kpi.component';
 import { HierarchyComponent } from './hierarchy/hierarchy.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTreeModule } from '@angular/material/tree';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 
 
 

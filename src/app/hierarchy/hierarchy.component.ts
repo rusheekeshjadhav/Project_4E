@@ -57,7 +57,7 @@ export class HierarchyComponent implements OnInit {
         res.push(node);
       }
     }
-    // console.log(res);
+    console.log(res);
     return res;
   }
 }

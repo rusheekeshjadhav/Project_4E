@@ -2,20 +2,21 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { TokenService } from './token.service';
 
 const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
-const CREATE_API = environment.URL+'/org-goal-management/api/goal';
-const LIST = environment.URL+'/org-goal-management/api/goal/get-kpi-list-given-date-range?start=1648751400000&end=1680287399000&includeViewOnly=true';
-const DEPARTMENT_API = environment.URL+'/setting-management/api/departments';
-const PERSPECTIVE_API = environment.URL+'/setting-management/api/perspectives';
-const DATA_CAPTURE_FREQUENCY_API = environment.URL+'/setting-management/api/data-capture-frequency';
-const REVIEW_FREQUENCY = environment.URL+'/setting-management/api/data-review-frequency';
-const KPI_TYPE = environment.URL+'/setting-management/api/kpi-types';
-const CATEGORY = environment.URL+'/setting-management/api/kpi-categories';
-const YEAR = environment.URL+'/setting-management/api/financial-years-list';
+const CREATE_API = environment.URL + '/org-goal-management/api/goal';
+const LIST = environment.URL + '/org-goal-management/api/goal/get-kpi-list-given-date-range?start=1648751400000&end=1680287399000&includeViewOnly=true';
+const DEPARTMENT_API = environment.URL + '/setting-management/api/departments';
+const PERSPECTIVE_API = environment.URL + '/setting-management/api/perspectives';
+const DATA_CAPTURE_FREQUENCY_API = environment.URL + '/setting-management/api/data-capture-frequency';
+const REVIEW_FREQUENCY = environment.URL + '/setting-management/api/data-review-frequency';
+const KPI_TYPE = environment.URL + '/setting-management/api/kpi-types';
+const CATEGORY = environment.URL + '/setting-management/api/kpi-categories';
+const YEAR = environment.URL + '/setting-management/api/financial-years-list';
 
-const HIERARCHY = environment.URL+'/org-goal-management/api/kpi/hierarchical-users-kpi-status';
+const HIERARCHY = environment.URL + '/org-goal-management/api/kpi/hierarchical-users-kpi-status';
 
 
 @Injectable({
@@ -23,7 +24,7 @@ const HIERARCHY = environment.URL+'/org-goal-management/api/kpi/hierarchical-use
 })
 export class KpiService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private ts: TokenService) { }
 
   getDepartment(): Observable<any> {
     return this.http.get(DEPARTMENT_API);
@@ -62,17 +63,17 @@ export class KpiService {
   listKPI(): Observable<any> {
     return this.http.get(LIST);
   }
-  
-  getHierarchy(): Observable<any>{
+
+  getHierarchy(): Observable<any> {
     let queryParams = new HttpParams();
 
-    queryParams=queryParams.append('employeeid','vikas.raut');
-    queryParams=queryParams.append('fyStartDate','1648751400000');
-    queryParams=queryParams.append('fyEndDate','1680287399000');
-    queryParams=queryParams.append('groupby','kpi');
-    queryParams=queryParams.append('kpiType','606573e173d7e41e2e59a4b1,606573e173d7e41e2e59a4b0,61ab4d8127d6319a5950235d,61ab4da827d6319a5950235e');
-    queryParams=queryParams.append('aggregate','false');
-    
-    return this.http.get(HIERARCHY,{params:queryParams});
+    queryParams = queryParams.append('employeeid', this.ts.decodeToken().employeeId);
+    queryParams = queryParams.append('fyStartDate', '1648751400000');
+    queryParams = queryParams.append('fyEndDate', '1680287399000');
+    queryParams = queryParams.append('groupby', 'kpi');
+    queryParams = queryParams.append('kpiType', '606573e173d7e41e2e59a4b1,606573e173d7e41e2e59a4b0,61ab4d8127d6319a5950235d,61ab4da827d6319a5950235e');
+    queryParams = queryParams.append('aggregate', 'false');
+
+    return this.http.get(HIERARCHY, { params: queryParams });
   }
 }

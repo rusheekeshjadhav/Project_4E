@@ -18,8 +18,11 @@ export class ListKpiComponent implements OnInit {
 
   ngOnInit(): void {
     this.ks.listKPI().subscribe(data => {
-      // console.log(data);
-      data.response.forEach((element: any) => {
+      console.log(data);
+      // data.response.forEach((element: any) => {
+      //   this.list.push(element);
+      // });
+      data.forEach((element: any) => {
         this.list.push(element);
       });
     });

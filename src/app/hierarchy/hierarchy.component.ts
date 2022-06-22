@@ -24,6 +24,7 @@ export class HierarchyComponent implements OnInit {
 
   ngOnInit(): void {
     this.ks.getHierarchy().subscribe(data => {
+      // console.log(data);
       this.hierarchyData = data.response;
       this.TREE_DATA = this.listToTree(this.hierarchyData);
       // console.log(this.TREE_DATA);

@@ -24,3 +24,7 @@ select {
     margin-left: auto;
     margin-right: auto;
 }
+
+div{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}

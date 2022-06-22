@@ -6,8 +6,8 @@ import { TokenService } from './token.service';
 
 const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
-const CREATE_API = environment.URL + '/org-goal-management/api/goal';
-const LIST = environment.URL + '/org-goal-management/api/goal/get-kpi-list-given-date-range?start=1648751400000&end=1680287399000&includeViewOnly=true';
+// const CREATE_API = environment.URL + '/org-goal-management/api/goal';
+// const LIST = environment.URL + '/org-goal-management/api/goal/get-kpi-list-given-date-range?start=1648751400000&end=1680287399000&includeViewOnly=true';
 const DEPARTMENT_API = environment.URL + '/setting-management/api/departments';
 const PERSPECTIVE_API = environment.URL + '/setting-management/api/perspectives';
 const DATA_CAPTURE_FREQUENCY_API = environment.URL + '/setting-management/api/data-capture-frequency';
@@ -18,6 +18,8 @@ const YEAR = environment.URL + '/setting-management/api/financial-years-list';
 
 const HIERARCHY = environment.URL + '/org-goal-management/api/kpi/hierarchical-users-kpi-status';
 
+const LIST = 'https://localhost:44368/api/KPI';
+const CREATE_API = 'https://localhost:44368/api/KPI';
 
 @Injectable({
   providedIn: 'root'

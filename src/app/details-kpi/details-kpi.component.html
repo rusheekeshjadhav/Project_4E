@@ -6,11 +6,16 @@
             <thead></thead>
             <tbody>
                 <tr>
+                    <td class="td1">KPI ID</td>
+                    <td class="td1">:</td>
+                    <td class="td1">{{item._id}}</td>
+                </tr>
+                <tr>
                     <td>KPI Title</td>
                     <td>:</td>
                     <td>{{item.title}}</td>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <td>Owner Employee ID</td>
                     <td>:</td>
                     <td>{{item.ownerEmployeeId}}</td>
@@ -24,21 +29,31 @@
                     <td>Owner Supervisor ID</td>
                     <td>:</td>
                     <td>{{item.ownerSupervisorId}}</td>
+                </tr> -->
+                <tr>
+                    <td class="td1">Goal Description</td>
+                    <td class="td1">:</td>
+                    <td class="td1">{{item.goalDescription}}</td>
                 </tr>
                 <tr>
+                    <td class="td1">Remark</td>
+                    <td class="td1">:</td>
+                    <td class="td1">{{item.remark}}</td>
+                </tr>
+                <!-- <tr>
                     <td>Financial Year</td>
                     <td>:</td>
                     <td>{{item.financialYearStart | date: 'y'}} - {{item.financialYearEnd | date: 'y'}}</td>
-                </tr>
+                </tr> -->
                 <tr>
                     <td>Department ID</td>
                     <td>:</td>
                     <td>{{item.departmentId}}</td>
                 </tr>
                 <tr>
-                    <td>Department Name</td>
+                    <td>Data Aggregation Method</td>
                     <td>:</td>
-                    <td>{{item.departmentName}}</td>
+                    <td>{{item.dataAggregationMethod}}</td>
                 </tr>
             </tbody>
         </table>

@@ -22,7 +22,7 @@
                 <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
                     <ng-container matTreeNodeOutlet>
                         <p>Total KPI: {{node.total}}</p>
-                        <app-pie [dataNode]=node></app-pie>
+                        <app-pie [dataNode]=node style="padding: 20px;"></app-pie>
                     </ng-container>
                 </ul>
             </li>
